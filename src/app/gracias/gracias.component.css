@@ -1,0 +1,36 @@
+h1 {
+    color: #4C4C43;
+    font-family: sans-serif;
+    font-weight: bold;
+  }
+  
+  .container {
+    max-width: 600px;
+    margin: 5rem auto;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    border: 2px solid #F9F9F9;
+  }
+  
+  .thank-you-msg {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #4C4C43;
+  }
+  
+  .info-text {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #4C4C43;
+  }
+
+  :host {
+    display: block;
+    height: 100%; 
+    width: 100%;
+    min-height: 100vh;
+    background-color: #F9F9F9;
+  }

@@ -1,0 +1,267 @@
+
+
+<div class="container">
+  <div class="text-center my-4">
+    <br>
+    <img src="./assets/logo_1.png" alt="Logotipo" class="img-fluid tamano">
+  </div>
+  <br>
+  <h1 class="my-4 text-center">Formulario de registro para usuarios</h1>
+
+
+
+
+  <div class="container">
+    <div class="alert alert-secondary" role="alert" id="instrucciones">
+      <strong class="alert-label">Instrucciones del formulario:</strong>
+      <div class="custom-hr"></div>
+      <p>Por favor, complete el siguiente formulario para registrarse y recibir atención médica. Asegúrese de
+        ingresar su información personal de manera precisa y completa. Su información será tratada de manera
+        confidencial.</p>
+    </div>
+    <br>
+
+    <form [formGroup]="encuestaForm" (ngSubmit)="onSubmit()">
+
+      <div class="form-group">
+        <label for="nombre" class="question-label">Nombre completo</label>
+        <input type="text" id="nombre" formControlName="nombre" class="form-control" placeholder="Su nombre completo"
+          required>
+        <div class="tooltip" id="tooltip-nombre">Favor de responder su nombre completo</div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="genero" class="question-label">Sexo</label>
+        <select id="genero" formControlName="genero" class="form-select" required>
+          <option value="" disabled selected>Selecciona su sexo</option>
+          <option value="Masculino">Hombre</option>
+          <option value="Femenino">Mujer</option>
+        </select>
+        <div class="tooltip" id="tooltip-genero">Favor de responder su sexo</div>
+      </div>
+
+      <div class="form-group">
+        <label for="fecha_nacimiento" class="question-label">Fecha de nacimiento</label>
+        <input type="date" id="fecha_nacimiento" formControlName="fecha_nacimiento" class="form-control" required>
+        <div class="tooltip" id="tooltip-fecha_nacimiento">Favor de responder su fecha de nacimiento</div>
+      </div>
+
+      <div class="form-group">
+        <label for="fecha_ingreso" class="question-label">Fecha de ingreso a AMC</label>
+        <input type="date" id="fecha_ingreso" formControlName="fecha_ingreso" class="form-control" required>
+        <div class="tooltip" id="tooltip-fecha_ingreso">Favor de responder su fecha de ingreso a AMC</div>
+      </div>
+
+      <div class="form-group">
+        <label for="edad" class="question-label">Edad</label>
+        <input type="number" id="edad" formControlName="edad" class="form-control" placeholder="Su edad" required>
+        <div class="tooltip" id="tooltip-edad">Favor de responder su edad</div>
+      </div>
+
+      <div class="form-group">
+        <label for="domicilio" class="question-label">Domicilio</label>
+        <input type="text" id="domicilio" formControlName="domicilio" class="form-control" placeholder="Su domicilio"
+          required>
+        <div class="tooltip" id="tooltip-domicilio">Favor de responder su domicilio</div>
+      </div>
+
+      <div class="form-group">
+        <label for="escolaridad" class="question-label">Escolaridad</label>
+        <select id="escolaridad" formControlName="escolaridad" class="form-select" required>
+          <option value="" disabled selected>Seleccione su nivel de escolaridad</option>
+          <option value="Primaria">Primaria</option>
+          <option value="Secundaria">Secundaria</option>
+          <option value="Preparatoria">Preparatoria</option>
+          <option value="Licenciatura">Licenciatura</option>
+          <option value="Maestría">Maestría</option>
+          <option value="Doctorado">Doctorado</option>
+        </select>
+        <div class="tooltip" id="tooltip-escolaridad">Favor de responder su escolaridad</div>
+      </div>
+
+      <div class="form-group">
+        <label for="estado_civil" class="question-label">Estado civil</label>
+        <select id="estado_civil" formControlName="estado_civil" class="form-select" required>
+          <option value="" disabled selected>Seleccione su estado civil</option>
+          <option value="Soltero(a)">Soltero(a)</option>
+          <option value="Casado(a)">Casado(a)</option>
+          <option value="Unión libre">Unión libre</option>
+          <option value="Divorciado(a)">Divorciado(a)</option>
+          <option value="Viudo(a)">Viudo(a)</option>
+        </select>
+        <div class="tooltip" id="tooltip-estado_civil">Favor de responder su estado civil</div>
+      </div>
+
+      <div class="form-group">
+        <label for="telefono" class="question-label">Teléfono</label>
+        <input type="tel" id="telefono" formControlName="telefono" class="form-control"
+          placeholder="Su número de teléfono" required>
+        <div class="tooltip" id="tooltip-telefono">Favor de responder su telefono</div>
+      </div>
+
+      <div class="form-group">
+        <label for="correo" class="question-label">Correo electrónico</label>
+        <input type="email" id="correo" formControlName="correo" class="form-control"
+          placeholder="Su correo electrónico" required>
+        <div class="tooltip" id="tooltip-correo">Favor de responder su correo</div>
+      </div>
+
+      <div class="form-group">
+        <label for="puesto" class="question-label">Puesto</label>
+        <input type="text" id="puesto" formControlName="puesto" class="form-control" placeholder="Su puesto actual"
+          required>
+        <div class="tooltip" id="tooltip-puesto">Favor de responder su puesto</div>
+      </div>
+
+      <div class="form-group">
+        <label for="preferencia_contacto" class="question-label">¿Cómo prefieres ser contactado?</label>
+        <select id="preferencia_contacto" formControlName="preferencia_contacto" class="form-select" required>
+          <option value="" disabled selected>Seleccione una opción</option>
+          <option value="Correo">Correo</option>
+          <option value="Teléfono">Teléfono</option>
+          <option value="WhatsApp">WhatsApp</option>
+        </select>
+        <div class="tooltip" id="tooltip-preferencia_contacto">Favor de responder su preferencia de contacto</div>
+      </div>
+
+      <h1 class="my-4 text-center">Formulario de registro para familia</h1>
+      <br>
+
+      <div class="alert alert-secondary" role="alert">
+        <strong class=alert-label>Instrucciones para dar de alta una familiar:</strong>
+        <div class="custom-hr"></div>
+        <p>Por favor, complete el siguiente formulario para registrar a sus parientes directos que recibirán
+          atención
+          médica. Puede registrar hasta 5 personas.</p>
+      </div>
+
+
+      <div formArrayName="familiares">
+        <div *ngFor="let familiar of familiares.controls; let i = index" [formGroupName]="i">
+          <hr>
+          <h3>Familiar {{ i + 1 }}</h3>
+          <br>
+
+          <div class="form-group">
+            <label for="familiar-{{ i }}-nombre_familiar" class="question-label">Nombre del Familiar</label>
+            <input id="familiar-{{ i }}-nombre_familiar" type="text" formControlName="nombre_familiar"
+              class="form-control" placeholder="Nombre completo de su familiar" />
+            <div id="tooltip-familiar-{{ i }}-nombre_familiar" class="tooltip">Favor de
+              responder el nombre de su familia</div>
+          </div>
+
+
+
+
+          <div class="form-group">
+            <label for="familiar-{{ i }}-genero_familiar" class="question-label">Sexo del Familiar</label>
+            <select id="familiar-{{ i }}-genero_familiar" type="text" formControlName="genero_familiar"
+              class="form-select">
+              <option value="" disabled selected>Selecciona una opción</option>
+              <option value="Masculino">Hombre</option>
+              <option value="Femenino">Mujer</option>
+            </select>
+            <div id="tooltip-familiar-{{ i }}-genero_familiar" class="tooltip">Favor de
+              responder el sexo de su familiar</div>
+          </div>
+
+
+
+          <div class="form-group">
+            <label for="familiar-{{ i }}-fecha_nacimiento_familiar" class="question-label">Fecha de Nacimiento del
+              Familiar</label>
+            <input id="familiar-{{ i }}-fecha_nacimiento_familiar" type="date"
+              formControlName="fecha_nacimiento_familiar" class="form-control" />
+            <div id="tooltip-familiar-{{ i }}-fecha_nacimiento_familiar" class="tooltip">Favor de responder la fecha de
+              nacimiento de su familiar</div>
+          </div>
+
+
+          <div class="form-group">
+            <label for="familiar-{{ i }}-edad_familiar" class="question-label">Edad del Familiar</label>
+            <input id="familiar-{{ i }}-edad_familiar" type="number" formControlName="edad_familiar"
+              class="form-control" placeholder="Edad de su familiar" />
+            <div id="tooltip-familiar-{{ i }}-edad_familiar" class="tooltip">Favor de
+              responder la edad de su familiar</div>
+          </div>
+
+          <div class="form-group">
+            <label for="familiar-{{ i }}-domicilio_familiar" class="question-label">Domicilio del Familiar</label>
+            <input id="familiar-{{ i }}-domicilio_familiar" type="text" formControlName="domicilio_familiar"
+              class="form-control" placeholder="Domicilio de su familiar" />
+            <div id="tooltip-familiar-{{ i }}-domicilio_familiar" class="tooltip">Favor de
+              responder el domicilio de su
+              familiar</div>
+          </div>
+
+
+
+          <div class="form-group">
+            <label for="familiar-{{ i }}-escolaridad_familiar" class="question-label">Escolaridad del Familiar</label>
+            <select id="familiar-{{ i }}-escolaridad_familiar" formControlName="escolaridad_familiar"
+              class="form-select">
+              <option value="" disabled selected>Seleccione el nivel de escolaridad de su familiar</option>
+              <option value="Ninguna">Ninguna</option>
+              <option value="Primaria">Primaria</option>
+              <option value="Secundaria">Secundaria</option>
+              <option value="Preparatoria">Preparatoria</option>
+              <option value="Licenciatura">Licenciatura</option>
+              <option value="Maestría">Maestría</option>
+              <option value="Doctorado">Doctorado</option>
+            </select>
+            <div class="tooltip" id="tooltip-familiar-{{ i }}-escolaridad_familiar">Favor de responder la escolaridad de
+              su familiar</div>
+          </div>
+
+          <div class="form-group">
+            <label for="familiar-{{ i }}-puesto_familiar" class="question-label">Puesto del Familiar</label>
+            <input id="familiar-{{ i }}-puesto_familiar" type="text" formControlName="puesto_familiar"
+              class="form-control" placeholder="Puesto de su familiar"/>
+            <div id="tooltip-familiar-{{ i }}-puesto_familiar" class="tooltip">Favor de
+              responder el puesto de su
+              familiar</div>
+          </div>
+
+          <div class="form-group">
+            <label for="familiar-{{ i }}-ocupacion_familiar" class="question-label">Ocupación del Familiar</label>
+            <input id="familiar-{{ i }}-ocupacion_familiar" type="text" formControlName="ocupacion_familiar"
+              class="form-control" placeholder="Ocupación de su familiar"/>
+            <div id="tooltip-familiar-{{ i }}-ocupacion_familiar" class="tooltip">Favor de
+              responder la ocupación de su
+              familiar</div>
+          </div>
+
+
+
+          <div class="form-group">
+            <label for="familiar-{{ i }}-parentesco_familiar" class="question-label">Parentesco con el familiar</label>
+            <select class="form-select" formControlName="parentesco_familiar" id="familiar-{{ i }}-parentesco_familiar">
+              <option value="" disabled selected>Seleccione el parentesco</option>
+              <option value="Padre/Madre">Padre/Madre</option>
+              <option value="Hijo/Hija">Hijo/Hija</option>
+              <option value="Esposo/Esposa">Esposo/Esposa</option>
+            </select>
+            <div id="tooltip-familiar-{{ i }}-parentesco_familiar" class="tooltip">Favor
+              de responder el parentesco que tiene
+              con
+              su familiar</div>
+          </div>
+
+          <button type="button" class="btn btn-dark custom-btn-eliminar" (click)="eliminarFamiliar(i)">Eliminar Familiar</button>
+        </div>
+      </div>
+
+      <hr>
+      <button type="button" class="btn btn-dark custom-btn-agregar" (click)="agregarFamiliar()">Agregar Familiar</button>
+
+      <hr>
+
+
+      <button type="submit" [ngClass]="buttonClass">Enviar</button>
+    </form>
+
+  </div>
+
+</div>
+

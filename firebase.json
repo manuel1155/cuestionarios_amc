@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/cuestionarios_amc-12/browser",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

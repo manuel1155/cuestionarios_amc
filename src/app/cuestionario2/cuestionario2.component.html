@@ -1,0 +1,218 @@
+
+<div class="container">
+    <div class="text-center my-4">
+        <br>
+        <img src="./assets/logo.png" alt="Logotipo" class="img-fluid tamano">
+    </div>
+    <br>
+    <h1 class="my-4 text-center">Encuesta de compromiso de los empleados</h1>
+    <br>
+
+    <div class="alert alert-secondary" role="alert">
+        <strong>Instrucciones de la Encuesta:</strong>
+        <hr>
+        <p>Agradecemos tu participación en esta encuesta diseñada para evaluar tu experiencia y satisfacción en el
+            trabajo. A través de una serie de preguntas, buscamos comprender mejor cómo te sientes en relación con
+            tu entorno laboral, los recursos disponibles y el reconocimiento que recibes. Cada pregunta se presenta
+            con un menú desplegable o campo de texto, te pedimos que respondas con sinceridad. Tus respuestas son
+            valiosas y contribuirán a mejorar nuestro ambiente de trabajo y apoyarte mejor en tu desarrollo
+            profesional. Por favor, completa todas las preguntas y haz clic en "Enviar" cuando hayas terminado.
+            ¡Gracias por tu colaboración!</p>
+    </div>
+    <form [formGroup]="encuestaForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+            <label for="antiguedad" class="question-label">¿Cuántos años llevas en la empresa?</label>
+            <select id="antiguedad" formControlName="antiguedad" class="form-select" required>
+                <option value="" disabled selected>Selecciona una respuesta</option>
+                <option value="Menos de 1 año">Menos de 1 año</option>
+                <option value="Entre 1 y 5 años">Entre 1 y 5 años</option>
+                <option value="Entre 6 y 10 años">Entre 6 y 10 años</option>
+                <option value="Entre 11 y 15 años">Entre 11 y 15 años</option>
+                <option value="Entre 16 y 20 años">Entre 16 y 20 años</option>
+                <option value="Más de 20 años">Más de 20 años</option>
+            </select>
+            <div class="tooltip" id="tooltip-antiguedad">Favor de responder tu antigüedad en la empresa</div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="edad" class="question-label">¿Cuál es tu edad?</label>
+            <input type="number" id="edad" formControlName="edad" class="form-control" placeholder="Tu edad" required>
+            <div class="tooltip" id="tooltip-edad">Favor de responder tu edad</div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="q1" class="question-label">1. ¿Sabes lo que se espera de ti en tu trabajo?</label>
+            <select id="q1" formControlName="q1" class="form-select" required>
+                <option value="" disabled selected>Selecciona una respuesta</option>
+                <option value="5">Completamente de acuerdo</option>
+                <option value="4">De acuerdo</option>
+                <option value="3">Neutral</option>
+                <option value="2">En desacuerdo</option>
+                <option value="1">Completamente en desacuerdo</option>
+            </select>
+            <div class="tooltip" id="tooltip-q1">Favor de responder la pregunta 1</div>
+        </div>
+
+        <div class="form-group">
+            <label for="q2" class="question-label">2. ¿Tienes los materiales y equipo para hacer correctamente tu
+                trabajo?</label>
+            <select id="q2" formControlName="q2" class="form-select" required>
+                <option value="" disabled selected>Selecciona una respuesta</option>
+                <option value="5">Completamente de acuerdo</option>
+                <option value="4">De acuerdo</option>
+                <option value="3">Neutral</option>
+                <option value="2">En desacuerdo</option>
+                <option value="1">Completamente en desacuerdo</option>
+            </select>
+            <div class="tooltip" id="tooltip-q2">Favor de responder la pregunta 2</div>
+        </div>
+
+        <div class="form-group">
+            <label for="q3" class="question-label">3. ¿Tienes la oportunidad de hacer lo que mejor sabes hacer cada día
+                en el trabajo?</label>
+            <select id="q3" formControlName="q3" class="form-select" required>
+                <option value="" disabled selected>Selecciona una respuesta</option>
+                <option value="5">Completamente de acuerdo</option>
+                <option value="4">De acuerdo</option>
+                <option value="3">Neutral</option>
+                <option value="2">En desacuerdo</option>
+                <option value="1">Completamente en desacuerdo</option>
+            </select>
+            <div class="tooltip" id="tooltip-q3">Favor de responder la pregunta 3</div>
+        </div>
+
+        <div class="form-group">
+            <label for="q4" class="question-label">4. En los últimos 7 días ¿Has recibido reconocimiento o
+                felicitaciones por hacer un buen trabajo?</label>
+            <select id="q4" formControlName="q4" class="form-select" required>
+                <option value="" disabled selected>Selecciona una respuesta</option>
+                <option value="5">Completamente de acuerdo</option>
+                <option value="4">De acuerdo</option>
+                <option value="3">Neutral</option>
+                <option value="2">En desacuerdo</option>
+                <option value="1">Completamente en desacuerdo</option>
+            </select>
+            <div class="tooltip" id="tooltip-q4">Favor de responder la pregunta 4</div>
+        </div>
+
+        <div class="form-group">
+            <label for="q5" class="question-label">5. ¿Sientes que tu supervisor o alguien se preocupa por ti como
+                persona en el trabajo?</label>
+            <select id="q5" formControlName="q5" class="form-select" required>
+                <option value="" disabled selected>Selecciona una respuesta</option>
+                <option value="5">Completamente de acuerdo</option>
+                <option value="4">De acuerdo</option>
+                <option value="3">Neutral</option>
+                <option value="2">En desacuerdo</option>
+                <option value="1">Completamente en desacuerdo</option>
+            </select>
+            <div class="tooltip" id="tooltip-q5">Favor de responder la pregunta 5</div>
+        </div>
+
+        <div class="form-group">
+            <label for="q6" class="question-label">6. ¿Hay alguien que alienta tu desarrollo en el trabajo?</label>
+            <select id="q6" formControlName="q6" class="form-select" required>
+                <option value="" disabled selected>Selecciona una respuesta</option>
+                <option value="5">Completamente de acuerdo</option>
+                <option value="4">De acuerdo</option>
+                <option value="3">Neutral</option>
+                <option value="2">En desacuerdo</option>
+                <option value="1">Completamente en desacuerdo</option>
+            </select>
+            <div class="tooltip" id="tooltip-q6">Favor de responder la pregunta 6</div>
+        </div>
+
+        <div class="form-group">
+            <label for="q7" class="question-label">7. ¿Tus opiniones se toman en cuenta en el trabajo?</label>
+            <select id="q7" formControlName="q7" class="form-select" required>
+                <option value="" disabled selected>Selecciona una respuesta</option>
+                <option value="5">Completamente de acuerdo</option>
+                <option value="4">De acuerdo</option>
+                <option value="3">Neutral</option>
+                <option value="2">En desacuerdo</option>
+                <option value="1">Completamente en desacuerdo</option>
+            </select>
+            <div class="tooltip" id="tooltip-q7">Favor de responder la pregunta 7</div>
+        </div>
+
+        <div class="form-group">
+            <label for="q8" class="question-label">8. ¿La misión/propósito de tu empresa hace sentir que tu trabajo es
+                importante?</label>
+            <select id="q8" formControlName="q8" class="form-select" required>
+                <option value="" disabled selected>Selecciona una respuesta</option>
+                <option value="5">Completamente de acuerdo</option>
+                <option value="4">De acuerdo</option>
+                <option value="3">Neutral</option>
+                <option value="2">En desacuerdo</option>
+                <option value="1">Completamente en desacuerdo</option>
+            </select>
+            <div class="tooltip" id="tooltip-q8">Favor de responder la pregunta 8</div>
+        </div>
+
+        <div class="form-group">
+            <label for="q9" class="question-label">9. ¿Tus compañeros de trabajo están comprometidos en hacer un trabajo
+                de calidad?</label>
+            <select id="q9" formControlName="q9" class="form-select" required>
+                <option value="" disabled selected>Selecciona una respuesta</option>
+                <option value="5">Completamente de acuerdo</option>
+                <option value="4">De acuerdo</option>
+                <option value="3">Neutral</option>
+                <option value="2">En desacuerdo</option>
+                <option value="1">Completamente en desacuerdo</option>
+            </select>
+            <div class="tooltip" id="tooltip-q9">Favor de responder la pregunta 9</div>
+        </div>
+
+        <div class="form-group">
+            <label for="q10" class="question-label">10. ¿Tienes un mejor amigo en el trabajo?</label>
+            <select id="q10" formControlName="q10" class="form-select" required>
+                <option value="" disabled selected>Selecciona una respuesta</option>
+                <option value="5">Completamente de acuerdo</option>
+                <option value="4">De acuerdo</option>
+                <option value="3">Neutral</option>
+                <option value="2">En desacuerdo</option>
+                <option value="1">Completamente en desacuerdo</option>
+            </select>
+            <div class="tooltip" id="tooltip-q10">Favor de responder la pregunta 10</div>
+        </div>
+
+        <div class="form-group">
+            <label for="q11" class="question-label">11. En los últimos seis meses ¿alguien en el trabajo te ha hablado
+                sobre su progreso?</label>
+            <select id="q11" formControlName="q11" class="form-select" required>
+                <option value="" disabled selected>Selecciona una respuesta</option>
+                <option value="5">Completamente de acuerdo</option>
+                <option value="4">De acuerdo</option>
+                <option value="3">Neutral</option>
+                <option value="2">En desacuerdo</option>
+                <option value="1">Completamente en desacuerdo</option>
+            </select>
+            <div class="tooltip" id="tooltip-q11">Favor de responder la pregunta 11</div>
+        </div>
+
+        <div class="form-group">
+            <label for="q12" class="question-label">12. En el último año ¿has tenido la oportunidad de aprender y
+                crecer?</label>
+            <select id="q12" formControlName="q12" class="form-select" required>
+                <option value="" disabled selected>Selecciona una respuesta</option>
+                <option value="5">Completamente de acuerdo</option>
+                <option value="4">De acuerdo</option>
+                <option value="3">Neutral</option>
+                <option value="2">En desacuerdo</option>
+                <option value="1">Completamente en desacuerdo</option>
+            </select>
+            <div class="tooltip" id="tooltip-q12">Favor de responder la pregunta 12</div>
+        </div>
+
+        <div class="submit-btn-container">
+        <button type="submit" [class]="buttonClass">Enviar</button>
+
+
+
+        </div>
+    </form>
+</div>
+

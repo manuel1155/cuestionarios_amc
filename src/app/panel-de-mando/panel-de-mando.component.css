@@ -1,0 +1,352 @@
+#tabla {
+  max-height: 1300px;
+  overflow-y: auto;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 15px;
+  overflow-x: auto;
+  border: 3px solid #293241;
+  border-collapse: separate;
+  border-spacing: 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table td {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  width: 160px;
+  min-width: 160px;
+  /* Asegura el ancho mínimo */
+  max-width: 160px;
+  /* Evita que se expanda */
+  color: #293241;
+  padding: 12px;
+  border-bottom: none;
+  border-left: none;
+  border-top: none;
+  border-right: 2px solid #3d5a80;
+  line-height: 1;
+  
+}
+
+
+
+
+.table tr:last-child td:first-child {
+  border-bottom-left-radius: 15px;
+}
+
+.table tr:last-child td:last-child {
+  border-bottom-right-radius: 15px;
+}
+
+:host {
+  display: block;
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #293241;
+}
+
+h2 {
+  color: #CEBB64;
+  margin: 0 auto;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.form-label {
+  color: #CEBB64;
+  font-weight: bold;
+}
+
+.rounded-box {
+  background-color: #3d5a80;
+  border-radius: 15px;
+  padding: 10px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.custom-btn-activado {
+  background-color: #CEBB64;
+  border-color: #CEBB64;
+}
+
+.custom-btn-activado:hover {
+  background-color: #AF9837;
+  border-color: #AF9837;
+}
+
+#filtrarNombre {
+  width: 265px;
+}
+
+#filtrarNombre:hover {
+  border: 1px solid #AF9837;
+  box-shadow: 1px 1px 15px 0px rgba(175, 152, 55, 1);
+  -webkit-box-shadow: 1px 1px 15px 0px rgba(175, 152, 55, 1);
+  -moz-box-shadow: 1px 1px 15px 0px rgba(175, 152, 55, 1);
+
+}
+
+#collectionSelect:hover {
+  border: 1px solid #AF9837;
+  box-shadow: 1px 1px 15px 0px rgba(175, 152, 55, 1);
+  -webkit-box-shadow: 1px 1px 15px 0px rgba(175, 152, 55, 1);
+  -moz-box-shadow: 1px 1px 15px 0px rgba(175, 152, 55, 1);
+}
+
+#fechaInicio:hover {
+  border: 1px solid #AF9837;
+  box-shadow: 1px 1px 15px 0px rgba(175, 152, 55, 1);
+  -webkit-box-shadow: 1px 1px 15px 0px rgba(175, 152, 55, 1);
+  -moz-box-shadow: 1px 1px 15px 0px rgba(175, 152, 55, 1);
+}
+
+#fechaFin:hover {
+  border: 1px solid #AF9837;
+  box-shadow: 1px 1px 15px 0px rgba(175, 152, 55, 1);
+  -webkit-box-shadow: 1px 1px 15px 0px rgba(175, 152, 55, 1);
+  -moz-box-shadow: 1px 1px 15px 0px rgba(175, 152, 55, 1);
+}
+
+.tamano {
+  width: 50%;
+  margin: 0 auto;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+
+
+#tabla-container {
+  scrollbar-width: thin;
+  scrollbar-color: #97BCDB #283A53;
+  border-radius: 10px;
+}
+
+#tabla-container::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+#tabla-container::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #283A53;
+}
+
+#tabla-container::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #97BCDB;
+}
+
+#tabla-container::-webkit-scrollbar-thumb:hover {
+  background-color: #85B1D5;
+}
+
+#tabla-container::-webkit-scrollbar-thumb:active {
+  background-color: #85B1D5;
+}
+
+
+
+
+
+/* vertical */
+
+
+#tabla-horizontal-container {
+  width: 100%;
+  /* Se adapta al contenedor padre */
+  max-width: 1050px;
+  /* Máximo ancho de 1050 píxeles */
+  overflow-y: auto;
+  /* Habilita el scrollbar vertical */
+  overflow-x: auto;
+  /* Habilita el scrollbar horizontal */
+  height: 400px;
+  /* Ajusta la altura del contenedor */
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f7f9fc;
+  padding: 20px;
+}
+
+#tabla-horizontal {
+  width: 1050px;
+  /* Asegúrate de que la tabla use todo el ancho */
+  min-width: 1050px;
+  /* Asegura que tome al menos el 100% de su contenedor */
+  border-collapse: collapse;
+  /* Para eliminar espacios entre celdas */
+  border-spacing: 0;
+  /* Eliminar el espaciado de las celdas */
+}
+
+#tabla-horizontal th,
+#tabla-horizontal td {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  color: #293241;
+  border-bottom: 1px solid #ddd;
+  /* Línea debajo de las celdas */
+  padding: 12px;
+  line-height: 1;
+}
+
+#tabla-horizontal th {
+  background-color: #283A53;
+  /* Fondo de encabezado */
+  color: white;
+  /* Color del texto del encabezado */
+  font-weight: bold;
+  /* Negrita para los encabezados */
+}
+
+#tabla-horizontal td {
+  background-color: #f0f4f8;
+  /* Color de fondo de las celdas */
+  color: #333;
+  /* Color del texto de las celdas */
+}
+
+/* Estilos para el scrollbar */
+#tabla-horizontal-container::-webkit-scrollbar {
+  height: 8px;
+  /* Altura del scrollbar horizontal */
+}
+
+#tabla-horizontal-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  /* Color del fondo del scrollbar */
+}
+
+#tabla-horizontal-container::-webkit-scrollbar-thumb {
+  background: #97BCDB;
+  /* Color del pulgar del scrollbar */
+}
+
+#tabla-horizontal-container::-webkit-scrollbar-thumb:hover {
+  background: #283A53;
+  /* Color del pulgar al pasar el ratón */
+}
+
+
+button img,
+svg {
+  width: 20px;
+  /* Ajusta el tamaño del SVG */
+  height: 20px;
+  /* Ajusta el tamaño del SVG */
+
+}
+
+
+
+
+
+.custom-btn-activado2 {
+  background-color: #97BCDB;
+  border-color: #97BCDB;
+  margin: 0 auto;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.custom-btn-activado2:hover {
+  background-color: #76A8D0;
+  border-color: #76A8D0;
+}
+
+.modal-info {
+  background-color: #C2D8EA;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 15px;
+}
+
+.modal-body {
+  background-color: #C2D8EA;
+}
+
+.modal-header {
+  background-color: #3D5A80;
+}
+
+.modal-footer {
+  background-color: #3D5A80;
+}
+
+#infoModal .form-label {
+  color: #293241;
+  /* Cambia el color solo para las etiquetas dentro de infoModal */
+  font-weight: bold;
+}
+
+.modal-title {
+  color: #CEBB64;
+}
+
+#infoModal {
+  border-radius: 35px;
+  margin: 0 auto;
+  padding: 10px;
+  text-align: left;
+}
+
+.modal-body {
+  max-height: 650px;
+  /* Altura máxima del cuerpo del modal */
+  overflow-y: auto;
+  /* Permitir el scroll vertical */
+}
+
+/* Estilos para el scrollbar */
+.modal-body::-webkit-scrollbar {
+  height: 8px;
+  /* Altura del scrollbar horizontal */
+  background: #283A53;
+  /* Color del pulgar al pasar el ratón */
+}
+
+.modal-body::-webkit-scrollbar-track {
+  background: #283A53;
+  /* Color del pulgar al pasar el ratón */
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+  background: #97BCDB;
+  /* Color del pulgar del scrollbar */
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+  background: #283A53;
+  /* Color del pulgar al pasar el ratón */
+}
+
+
+.table input[type="checkbox"] {
+  background-color: #3D5A80;
+  width: 20px;
+  height: 20px;
+  margin: 0 auto;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.table input[type="checkbox"]:checked {
+  background-color: #AF9837; 
+  border-color: #AF9837;
+}
+
+
+

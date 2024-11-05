@@ -1,0 +1,45 @@
+h1 {
+    color: #4C4C43;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.container {
+    max-width: 600px;
+    margin-top: 5rem;
+    padding: 2rem;
+    text-align: center;
+}
+
+.thank-you-msg {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #4C4C43;
+}
+
+.info-text {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #4C4C43;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    margin: 0;
+}
+
+body, .main-container {
+    background-color: #d7dadf; 
+
+  }
+  

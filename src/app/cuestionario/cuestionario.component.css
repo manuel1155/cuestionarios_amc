@@ -1,0 +1,50 @@
+
+.container {
+    background-color: #EBEBEB;
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+
+h1 {
+    color: #4C4C43;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.question-label {
+    line-height: 1.2;
+    font-weight: bold;
+    color: #4C4C43;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.submit-btn-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.form-group select {
+    margin-bottom: 2rem;
+}
+
+.alert-info {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.alert-info::after {
+    content: "";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+.alert-info p {
+    margin-bottom: 0;
+}
+
