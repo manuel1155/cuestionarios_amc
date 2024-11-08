@@ -1,5 +1,3 @@
-
-
 <div class="container">
   <div class="text-center my-4">
     <br>
@@ -7,9 +5,6 @@
   </div>
   <br>
   <h1 class="my-4 text-center">Formulario de registro para usuarios</h1>
-
-
-
 
   <div class="container">
     <div class="alert alert-secondary" role="alert" id="instrucciones">
@@ -21,7 +16,31 @@
     </div>
     <br>
 
+    <!-- Sección para ingresar y validar la CURP -->
     <form [formGroup]="encuestaForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="curp" class="question-label">CURP</label>
+        <input type="text" id="curp" formControlName="curp" maxlength="18" class="form-control"
+          placeholder="Ingrese su CURP" (keyup)="onKeydownCURP($event)" required>
+        <div class="tooltip" id="tooltip-curp">Favor de ingresar su CURP</div>
+        <div
+          *ngIf="encuestaForm.get('curp')?.invalid && (encuestaForm.get('curp')?.dirty || encuestaForm.get('curp')?.touched)"
+          class="invalid-feedback">
+          <strong *ngIf="encuestaForm.get('curp')?.errors?.['required']">CAMPO REQUERIDO!</strong>
+          <strong *ngIf="encuestaForm.get('curp')?.errors?.['pattern']">FORMATO NO VALIDO!</strong>
+        </div>
+      </div>
+      <button *ngIf="!buttonDisabled" type="button" class="btn btn-primary" (click)="validarCurp()"
+        [disabled]="!encuestaForm.get('curp')?.valid">Validar CURP</button>
+    </form>
+
+    <!-- Mensaje si la CURP ya está registrada -->
+    <div *ngIf="curpExiste" class="alert alert-danger mt-3" role="alert">
+      <strong>La CURP ingresada ya está registrada.</strong> Por favor, intente con otra CURP.
+    </div>
+
+    <!-- Formulario de registro si la CURP no está registrada -->
+    <form *ngIf="curpValidada && !curpExiste" [formGroup]="encuestaForm" (ngSubmit)="onSubmit()">
 
       <div class="form-group">
         <label for="nombre" class="question-label">Nombre completo</label>
@@ -29,7 +48,6 @@
           required>
         <div class="tooltip" id="tooltip-nombre">Favor de responder su nombre completo</div>
       </div>
-
 
       <div class="form-group">
         <label for="genero" class="question-label">Sexo</label>
@@ -94,6 +112,25 @@
       </div>
 
       <div class="form-group">
+        <label class="question-label"> ¿Tiene alguna enfermedad crónica?</label><br>
+        <div class="form-check form-check-inline">
+          <input type="radio" id="enfe_cronicas_si" formControlName="enfe_cronicas" class="form-check-input" value="Sí" required (change)="onEnfermedadCronicaChange($event)">
+          <label class="form-check-label question-label" for="enfe_cronicas_si">Sí</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input type="radio" id="enfe_cronicas_no" formControlName="enfe_cronicas" class="form-check-input" value="No" required (change)="onEnfermedadCronicaChange($event)">
+          <label class="form-check-label question-label" for="enfe_cronicas_no">No</label>
+        </div>
+        <div class="tooltip" id="tooltip-enfe_cronicas">Favor de responder si tiene alguna enfermedad crónica</div>
+      </div>
+
+      <div *ngIf="encuestaForm.get('enfe_cronicas')?.value === 'Sí'" class="form-group">
+        <label for="tipo_enfermedad_cronica" class="question-label">Especifique el tipo de enfermedad crónica</label>
+        <textarea id="tipo_enfermedad_cronica" formControlName="tipo_enfermedad_cronica" class="form-control" placeholder="Especifique su enfermedad crónica"></textarea>
+        <div class="tooltip" id="tooltip-tipo_enfermedad_cronica">Favor de especificar su enfermedad crónica</div>
+      </div>
+
+      <div class="form-group">
         <label for="telefono" class="question-label">Teléfono</label>
         <input type="tel" id="telefono" formControlName="telefono" class="form-control"
           placeholder="Su número de teléfono" required>
@@ -136,12 +173,22 @@
           médica. Puede registrar hasta 5 personas.</p>
       </div>
 
-
       <div formArrayName="familiares">
         <div *ngFor="let familiar of familiares.controls; let i = index" [formGroupName]="i">
           <hr>
           <h3>Familiar {{ i + 1 }}</h3>
           <br>
+
+          <div class="form-group">
+            <label for="familiar-{{ i }}-curp_fam" class="question-label">CURP</label>
+            <input type="text" id="familiar-{{ i }}-curp_fam" formControlName="curp_fam" maxlength="18" class="form-control" placeholder="Ingrese su CURP"
+              (keyup)="onKeydownCURPFamiliar($event, i)" required>
+            <div class="tooltip" id="tooltip-familiar-{{ i }}-curp_fam">Favor de ingresar su CURP</div>
+          </div>
+          <div class="invalid-feedback" *ngIf="familiar.get('curp_fam')?.invalid && (familiar.get('curp_fam')?.dirty || familiar.get('curp_fam')?.touched)">
+            <strong *ngIf="familiar.get('curp_fam')?.errors?.['required']">CAMPO REQUERIDO!</strong>
+            <strong *ngIf="familiar.get('curp_fam')?.errors?.['pattern']">FORMATO NO VALIDO!</strong>
+          </div>
 
           <div class="form-group">
             <label for="familiar-{{ i }}-nombre_familiar" class="question-label">Nombre del Familiar</label>
@@ -150,9 +197,6 @@
             <div id="tooltip-familiar-{{ i }}-nombre_familiar" class="tooltip">Favor de
               responder el nombre de su familia</div>
           </div>
-
-
-
 
           <div class="form-group">
             <label for="familiar-{{ i }}-genero_familiar" class="question-label">Sexo del Familiar</label>
@@ -166,8 +210,6 @@
               responder el sexo de su familiar</div>
           </div>
 
-
-
           <div class="form-group">
             <label for="familiar-{{ i }}-fecha_nacimiento_familiar" class="question-label">Fecha de Nacimiento del
               Familiar</label>
@@ -176,7 +218,6 @@
             <div id="tooltip-familiar-{{ i }}-fecha_nacimiento_familiar" class="tooltip">Favor de responder la fecha de
               nacimiento de su familiar</div>
           </div>
-
 
           <div class="form-group">
             <label for="familiar-{{ i }}-edad_familiar" class="question-label">Edad del Familiar</label>
@@ -194,8 +235,6 @@
               responder el domicilio de su
               familiar</div>
           </div>
-
-
 
           <div class="form-group">
             <label for="familiar-{{ i }}-escolaridad_familiar" class="question-label">Escolaridad del Familiar</label>
@@ -217,7 +256,7 @@
           <div class="form-group">
             <label for="familiar-{{ i }}-puesto_familiar" class="question-label">Puesto del Familiar</label>
             <input id="familiar-{{ i }}-puesto_familiar" type="text" formControlName="puesto_familiar"
-              class="form-control" placeholder="Puesto de su familiar"/>
+              class="form-control" placeholder="Puesto de su familiar" />
             <div id="tooltip-familiar-{{ i }}-puesto_familiar" class="tooltip">Favor de
               responder el puesto de su
               familiar</div>
@@ -226,13 +265,11 @@
           <div class="form-group">
             <label for="familiar-{{ i }}-ocupacion_familiar" class="question-label">Ocupación del Familiar</label>
             <input id="familiar-{{ i }}-ocupacion_familiar" type="text" formControlName="ocupacion_familiar"
-              class="form-control" placeholder="Ocupación de su familiar"/>
+              class="form-control" placeholder="Ocupación de su familiar" />
             <div id="tooltip-familiar-{{ i }}-ocupacion_familiar" class="tooltip">Favor de
               responder la ocupación de su
               familiar</div>
           </div>
-
-
 
           <div class="form-group">
             <label for="familiar-{{ i }}-parentesco_familiar" class="question-label">Parentesco con el familiar</label>
@@ -248,20 +285,20 @@
               su familiar</div>
           </div>
 
-          <button type="button" class="btn btn-dark custom-btn-eliminar" (click)="eliminarFamiliar(i)">Eliminar Familiar</button>
+          <button type="button" class="btn btn-dark custom-btn-eliminar" (click)="eliminarFamiliar(i)">Eliminar
+            Familiar</button>
         </div>
       </div>
 
       <hr>
-      <button type="button" class="btn btn-dark custom-btn-agregar" (click)="agregarFamiliar()">Agregar Familiar</button>
+      <button type="button" class="btn btn-dark custom-btn-agregar" (click)="agregarFamiliar()">Agregar
+        Familiar</button>
 
       <hr>
 
-
-      <button type="submit" [ngClass]="buttonClass">Enviar</button>
+      <button type="submit" class="btn btn-success">Enviar</button>
     </form>
 
   </div>
 
 </div>
-

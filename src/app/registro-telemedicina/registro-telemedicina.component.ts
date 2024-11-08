@@ -1,25 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
-import { FirestoreService } from '../firestore.service';
+import { TelemedicinaService } from '../services/telemedicina/telemedicina-service.service';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common'; 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
-
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-registro-telemedicina',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, FormsModule],
   templateUrl: './registro-telemedicina.component.html',
-  styleUrl: './registro-telemedicina.component.css'
+  styleUrls: ['./registro-telemedicina.component.css']
 })
-export class RegistroTelemedicinaComponent  implements OnInit{
+export class RegistroTelemedicinaComponent implements OnInit {
   encuestaForm: FormGroup;
   buttonClass: string = 'btn btn-success btn-lg custom-btn-activado';
+  curpValidada: boolean = false;
+  curpExiste: boolean = false;
+  validCURP: boolean = false;
+  buttonDisabled: boolean = false;
 
   constructor(
     private fb: FormBuilder,
-    private firestoreService: FirestoreService,
+    private telemedicinaService: TelemedicinaService,
     private router: Router
   ) {
     this.encuestaForm = this.fb.group({
@@ -35,25 +38,48 @@ export class RegistroTelemedicinaComponent  implements OnInit{
       correo: ['', [Validators.required, Validators.email]],
       puesto: ['', Validators.required],
       preferencia_contacto: ['', Validators.required],
-      familiares: this.fb.array([]) 
-    });
-
-    this.setupFieldListeners();
-    this.encuestaForm.valueChanges.subscribe(() => {
-      this.updateButtonClass();
+      familiares: this.fb.array([]),
+      curp: ['', [Validators.required, Validators.pattern(/^([A-Z]{4}\d{6}[HM][A-Z]{5}\d{2})$/)]],// Añadir campo CURP
+      enfe_cronicas: [ '', Validators.required ],
+      tipo_enfermedad_cronica: [ '', Validators.required ],
     });
   }
 
+  get f() { return this.encuestaForm.controls; }
 
   get familiares(): FormArray {
     return this.encuestaForm.get('familiares') as FormArray;
   }
 
+  async onKeydownCURP(event: KeyboardEvent) {
+    const campo = (event.target as HTMLInputElement).attributes.getNamedItem('formcontrolname')?.value;
+    if (!campo) return;
+    let value: string = this.encuestaForm.controls[campo].value;
+    value = value.toUpperCase();
+    this.encuestaForm.controls[campo].setValue(value);
+    const pacCurpControl = this.encuestaForm.get('curp');
+    if (value.length >= 18 && pacCurpControl && pacCurpControl.valid) {
+      this.validCURP = true;
+    }
+  }
+
+  async onKeydownCURPFamiliar(event: KeyboardEvent, index: number) {
+    const campo = (event.target as HTMLInputElement).attributes.getNamedItem('formcontrolname')?.value;
+    if (!campo) return;
+    let value: string = this.familiares.at(index).get(campo)?.value;
+    value = value.toUpperCase();
+    this.familiares.at(index).get(campo)?.setValue(value);
+    const famCurpControl = this.familiares.at(index).get('curp_fam');
+    if (value.length >= 18 && famCurpControl && famCurpControl.valid) {
+      this.validCURP = true;
+    }
+  }
 
   agregarFamiliar(): void {
     if (this.familiares.length < 5) {
       const index = this.familiares.length;
       const familiarGroup = this.fb.group({
+        curp_fam: ['', [Validators.required, Validators.pattern(/^([A-Z]{4}\d{6}[HM][A-Z]{5}\d{2})$/)]],
         nombre_familiar: ['', Validators.required],
         genero_familiar: ['', Validators.required],
         fecha_nacimiento_familiar: ['', Validators.required],
@@ -68,7 +94,6 @@ export class RegistroTelemedicinaComponent  implements OnInit{
       this.familiares.push(familiarGroup);
     }
   }
-  
 
   eliminarFamiliar(index: number): void {
     if (index > -1) {
@@ -77,9 +102,6 @@ export class RegistroTelemedicinaComponent  implements OnInit{
   }
 
   ngOnInit(): void {
-    if (localStorage.getItem('formSubmitted')) {
-      this.router.navigate(['/gracias_telemedicina']);
-    }
   }
 
   setupFieldListeners(): void {
@@ -131,98 +153,117 @@ export class RegistroTelemedicinaComponent  implements OnInit{
   }
 
   updateButtonClass(): void {
-    this.buttonClass = this.encuestaForm.valid && this.familiares.controls.every(f => f.valid) 
-      ? 'btn btn-success btn-lg custom-btn-activado' 
+    this.buttonClass = this.encuestaForm.valid && this.familiares.controls.every(f => f.valid)
+      ? 'btn btn-success btn-lg custom-btn-activado'
       : 'btn btn-danger btn-lg custom-btn-desactivado';
   }
 
-/*   onSubmit(): void {
+  validarCurp(): void {
+    const curp = this.encuestaForm.get('curp')?.value;
+    if (curp) {
+      this.telemedicinaService.checkCurpExists(curp).subscribe(exists => {
+        this.curpValidada = true;
+        this.curpExiste = exists;
+        if (exists) {
+          this.encuestaForm.get('curp')?.reset();
+          this.buttonDisabled = false;
+        } else {
+          this.curpValidada = true;
+          this.buttonDisabled = true;
+        }
+      });
+    }
+  }
+
+  onEnfermedadCronicaChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    console.log(`Enfermedad crónica changed to: ${input.value}`);
+    const tipoEnfermedadControl = this.encuestaForm.get('tipo_enfermedad_cronica');
+    if (input.value.toLowerCase() === 'no') {
+      tipoEnfermedadControl?.clearValidators();
+      tipoEnfermedadControl?.setValue('');
+    } else {
+      tipoEnfermedadControl?.setValidators([Validators.required]);
+    }
+    tipoEnfermedadControl?.updateValueAndValidity();
+  }
+
+  onSubmit(): void {
     if (this.encuestaForm.valid && this.familiares.controls.every(f => f.valid)) {
-      console.log("Formulario válido", this.encuestaForm.value);
-      this.firestoreService.saveFormData(this.encuestaForm.value)
-        .then(() => {
-          console.log("Datos guardados en Firestore");
-          localStorage.setItem('formSubmitted', 'true');
-          this.router.navigate(['/gracias_telemedicina']);
-        })
-        .catch(error => {
-          console.error("Error guardando datos en Firestore", error);
-        });
+      const curp = this.encuestaForm.get('curp')?.value;
+      this.buttonDisabled = true; // Disable the button to prevent multiple submissions
+      this.telemedicinaService.checkCurpExists(curp).subscribe(exists => {
+        if (!exists) {
+          const formData = {
+            ...this.encuestaForm.value,
+            f_creado: new Date() // Add creation date
+          };
+          this.telemedicinaService.saveForm(formData).then(() => {
+            localStorage.setItem('formSubmitted', 'true');
+            this.router.navigate(['/gracias_telemedicina']);
+          }).catch(error => {
+            console.error("Error guardando datos en Firestore", error);
+            this.buttonDisabled = false; // Re-enable the button in case of error
+          });
+        } else {
+          console.log("La CURP ya está registrada");
+          this.buttonDisabled = false; // Re-enable the button if CURP exists
+        }
+      });
     } else {
       console.log("Formulario inválido");
       this.highlightInvalidFields();
     }
-  } */
-
-    onSubmit(): void {
-      if (this.encuestaForm.valid && this.familiares.controls.every(f => f.valid)) {
-        console.log("Formulario válido", this.encuestaForm.value);
-        this.firestoreService.saveFormData(this.encuestaForm.value, 'registro-usuarios-telemedicina') // Guardar en la colección específica
-          .then(() => {
-            console.log("Datos guardados en Firestore");
-            localStorage.setItem('formSubmitted', 'true');
-            this.router.navigate(['/gracias_telemedicina']);
-          })
-          .catch(error => {
-            console.error("Error guardando datos en Firestore", error);
-          });
-      } else {
-        console.log("Formulario inválido");
-        this.highlightInvalidFields();
-      }
-    }
-    
+  }
 
   highlightInvalidFields(): void {
     const controls = this.encuestaForm.controls;
     let firstInvalidControl: HTMLElement | null = null;
-  
+
     // Resaltar campos del formulario principal
     for (const name in controls) {
       if (controls.hasOwnProperty(name) && controls[name].invalid) {
         const invalidControl = document.querySelector(`[formControlName="${name}"]`) as HTMLElement;
         const tooltip = document.getElementById(`tooltip-${name}`);
-  
+
         if (invalidControl) {
           if (tooltip) {
             tooltip.classList.add('show');
           }
-  
+
           invalidControl.classList.add('is-invalid');
-  
+
           if (!firstInvalidControl) {
             firstInvalidControl = invalidControl;
           }
         }
       }
     }
-  
 
     this.familiares.controls.forEach((control, index: number) => {
       const group = control as FormGroup;
-  
+
       Object.keys(group.controls).forEach(fieldName => {
         const fieldControl = group.get(fieldName);
         const invalidControl = document.getElementById(`familiar-${index}-${fieldName}`) as HTMLElement;
         const tooltip = document.getElementById(`tooltip-familiar-${index}-${fieldName}`);
-  
+
         if (fieldControl && fieldControl.invalid && invalidControl) {
           if (tooltip) {
             tooltip.classList.add('show');
           }
-  
+
           invalidControl.classList.add('is-invalid');
-  
+
           if (!firstInvalidControl) {
             firstInvalidControl = invalidControl;
           }
         }
       });
     });
-  
+
     if (firstInvalidControl) {
       firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   }
-
 }
