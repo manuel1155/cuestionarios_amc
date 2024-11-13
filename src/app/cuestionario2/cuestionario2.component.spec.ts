@@ -87,7 +87,7 @@ export class Cuestionario2Component {
     if (this.encuestaForm.valid) {
       console.log("Formato valido");
       console.log(this.encuestaForm.value);
-      this.firestoreService.saveFormData(this.encuestaForm.value).then(() => {
+      this.firestoreService.saveFormData(this.encuestaForm.value, 'encuesta-compromiso-empleados').then(() => {
         console.log("Datos guardados en Firestore");
         this.router.navigate(['/gracias']); // Redirige al usuario
       }).catch(error => {

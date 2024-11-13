@@ -8,9 +8,9 @@ import { GraciasTelemedicinaComponent } from './gracias-telemedicina/gracias-tel
 import { PanelDeMandoComponent } from './panel-de-mando/panel-de-mando.component';
 
 export const routes: Routes = [
+  { path: '', redirectTo: '/panel-de-mando', pathMatch: 'full' },
   { path: 'compromiso_empleado', component: Cuestionario2Component },
   { path: 'gracias_compromiso', component: GraciasComponent },
-  { path: '', redirectTo: '/compromiso_empleado', pathMatch: 'full' }, // Redirige a cuestionario por defecto
   { path: 'registro_telemedicina', component: RegistroTelemedicinaComponent },
   { path: 'gracias_telemedicina', component: GraciasTelemedicinaComponent },
   { path: 'panel-de-mando', component: PanelDeMandoComponent },
@@ -20,6 +20,7 @@ export const routes: Routes = [
   imports: [RouterModule.forRoot(routes),TooltipModule.forRoot()],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }
 export class AppModule {}
 
