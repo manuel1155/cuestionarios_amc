@@ -133,7 +133,7 @@
       <div class="form-group">
         <label for="telefono" class="question-label">Teléfono</label>
         <input type="tel" id="telefono" formControlName="telefono" class="form-control"
-          placeholder="Su número de teléfono" required>
+          placeholder="Su número de teléfono" maxlength="10" required>
         <div class="tooltip" id="tooltip-telefono">Favor de responder su telefono</div>
       </div>
 
@@ -283,6 +283,17 @@
               de responder el parentesco que tiene
               con
               su familiar</div>
+          </div>
+
+          <div class="form-group">
+            <label for="familiar-{{ i }}-telefono_familiar" class="question-label">Teléfono del Familiar</label>
+            <input id="familiar-{{ i }}-telefono_familiar" type="tel" formControlName="telefono_familiar" class="form-control" placeholder="Teléfono de su familiar" maxlength="10" />
+            <div id="tooltip-familiar-{{ i }}-telefono_familiar" class="tooltip">Favor de responder el teléfono de su familiar</div>
+          </div>
+          <div class="form-group">
+            <label for="familiar-{{ i }}-correo_familiar" class="question-label">Correo del Familiar</label>
+            <input id="familiar-{{ i }}-correo_familiar" type="email" formControlName="correo_familiar" class="form-control" placeholder="Correo de su familiar" />
+            <div id="tooltip-familiar-{{ i }}-correo_familiar" class="tooltip">Favor de responder el correo de su familiar</div>
           </div>
 
           <button type="button" class="btn btn-dark custom-btn-eliminar" (click)="eliminarFamiliar(i)">Eliminar

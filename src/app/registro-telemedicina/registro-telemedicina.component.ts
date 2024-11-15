@@ -34,12 +34,12 @@ export class RegistroTelemedicinaComponent implements OnInit {
       domicilio: ['', Validators.required],
       escolaridad: ['', Validators.required],
       estado_civil: ['', Validators.required],
-      telefono: ['', Validators.required],
-      correo: ['', [Validators.required, Validators.email]],
+      telefono: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]], // Validador de 10 dígitos
+      correo: ['', [Validators.email]], // Hacer que el campo de correo no sea obligatorio
       puesto: ['', Validators.required],
       preferencia_contacto: ['', Validators.required],
       familiares: this.fb.array([]),
-      curp: ['', [Validators.required, Validators.pattern(/^([A-Z]{4}\d{6}[HM][A-Z]{5}\d{2})$/)]],// Añadir campo CURP
+      curp: ['', [Validators.required, Validators.pattern(/^([A-Z]{1}[AEIOU]{1}[A-Z]{2})(\d{2})(\d{2})(\d{2})([HM]{1})(AS|BC|BS|CC|CL|CM|CS|CH|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)([B-DF-HJ-NP-TV-Z]{3})([A-Z\d]{1})(\d)$/)]],// Añadir campo CURP
       enfe_cronicas: [ '', Validators.required ],
       tipo_enfermedad_cronica: [ '', Validators.required ],
     });
@@ -79,7 +79,7 @@ export class RegistroTelemedicinaComponent implements OnInit {
     if (this.familiares.length < 5) {
       const index = this.familiares.length;
       const familiarGroup = this.fb.group({
-        curp_fam: ['', [Validators.required, Validators.pattern(/^([A-Z]{4}\d{6}[HM][A-Z]{5}\d{2})$/)]],
+        curp_fam: ['', [Validators.required, Validators.pattern(/^([A-Z]{1}[AEIOU]{1}[A-Z]{2})(\d{2})(\d{2})(\d{2})([HM]{1})(AS|BC|BS|CC|CL|CM|CS|CH|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)([B-DF-HJ-NP-TV-Z]{3})([A-Z\d]{1})(\d)$/)]],
         nombre_familiar: ['', Validators.required],
         genero_familiar: ['', Validators.required],
         fecha_nacimiento_familiar: ['', Validators.required],
@@ -88,7 +88,9 @@ export class RegistroTelemedicinaComponent implements OnInit {
         escolaridad_familiar: ['', Validators.required],
         puesto_familiar: ['', Validators.required],
         ocupacion_familiar: ['', Validators.required],
-        parentesco_familiar: ['', Validators.required]
+        parentesco_familiar: ['', Validators.required],
+        telefono_familiar: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]], // Validador de 10 dígitos
+        correo_familiar: ['', [Validators.email]], // Agregar campo de correo no obligatorio
       });
 
       this.familiares.push(familiarGroup);

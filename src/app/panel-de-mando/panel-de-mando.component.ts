@@ -115,7 +115,6 @@ export class PanelDeMandoComponent implements OnInit {
   }
 
   openModal(data: any): void {
-    console.log('Data seleccionada:', data);
     this.selectedRowData = data;
     const modalElement = document.getElementById('infoModal');
     if (modalElement) {

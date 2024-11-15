@@ -238,8 +238,7 @@
             <br>
             <div class="mb-3">
               <label for="correo" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="nombre" [(ngModel)]="selectedRowData.nombre" name="nombre"
-                disabled>
+              <input type="text" class="form-control" id="nombre" [(ngModel)]="selectedRowData.nombre" name="nombre" disabled>
             </div>
             <div class="mb-3">
               <label for="edad" class="form-label">Edad</label>
@@ -255,14 +254,13 @@
 
             <div class="mb-3">
               <label for="correo" class="form-label">Correo</label>
-              <input type="text" class="form-control" id="correo" [(ngModel)]="selectedRowData.correo" name="correo"
-                disabled>
+              <input type="text" class="form-control" id="correo" [(ngModel)]="selectedRowData.correo" name="correo" disabled>
             </div>
 
             <div class="mb-3">
               <label for="domicilio" class="form-label">Domicilio</label>
-              <input type="text" class="form-control" id="domicilio" [(ngModel)]="selectedRowData.domicilio"
-                name="domicilio" disabled>
+              <input type="text" class="form-control" id="domicilio" [(ngModel)]="selectedRowData.domicilio" name="domicilio"
+                disabled>
             </div>
 
             <div class="mb-3">
@@ -279,20 +277,18 @@
 
             <div class="mb-3">
               <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
-              <input type="text" class="form-control" id="fechaNacimiento"
-                [(ngModel)]="selectedRowData.fecha_nacimiento" name="fechaNacimiento" disabled>
+              <input type="text" class="form-control" id="fechaNacimiento" [(ngModel)]="selectedRowData.fecha_nacimiento"
+                name="fechaNacimiento" disabled>
             </div>
 
             <div class="mb-3">
               <label for="genero" class="form-label">Género</label>
-              <input type="text" class="form-control" id="genero" [(ngModel)]="selectedRowData.genero" name="genero"
-                disabled>
+              <input type="text" class="form-control" id="genero" [(ngModel)]="selectedRowData.genero" name="genero" disabled>
             </div>
 
             <div class="mb-3">
               <label for="puesto" class="form-label">Puesto</label>
-              <input type="text" class="form-control" id="puesto" [(ngModel)]="selectedRowData.puesto" name="puesto"
-                disabled>
+              <input type="text" class="form-control" id="puesto" [(ngModel)]="selectedRowData.puesto" name="puesto" disabled>
             </div>
 
             <div class="mb-3">
@@ -302,62 +298,93 @@
             </div>
 
             <div *ngFor="let familiar of selectedRowData.familiares; let i = index">
-              <h5>Familiar {{ i + 1 }}</h5>
-              <div class="mb-3">
-                <label class="form-label">Nombre del Familiar</label>
-                <input type="text" class="form-control" [value]="familiar.nombre_familiar || 'Sin registrar'"
-                  name="nombreFamiliar{{i}}" disabled>
-              </div>
+              <fieldset class="familiar-fieldset">
+                <legend>Familiar {{ i + 1 }}</legend>
+                <div class="mb-3">
+                  <label class="form-label">CURP Familiar</label>
+                  <input type="text" class="form-control" [value]="familiar.curp_fam || 'Sin registrar'"
+                    name="nombreFamiliar{{i}}" disabled>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Nombre del Familiar</label>
+                  <input type="text" class="form-control" [value]="familiar.nombre_familiar || 'Sin registrar'"
+                    name="nombreFamiliar{{i}}" disabled>
+                </div>
 
-              <div class="mb-3">
-                <label class="form-label">Género del Familiar</label>
-                <input type="text" class="form-control" [value]="familiar.genero_familiar || 'Sin registrar'"
-                  name="generoFamiliar{{i}}" disabled>
-              </div>
+                <div class="mb-3">
+                  <label class="form-label">Género del Familiar</label>
+                  <input type="text" class="form-control" [value]="familiar.genero_familiar || 'Sin registrar'"
+                    name="generoFamiliar{{i}}" disabled>
+                </div>
 
-              <div class="mb-3">
-                <label class="form-label">Fecha de Nacimiento del Familiar</label>
-                <input type="text" class="form-control" [value]="familiar.fecha_nacimiento_familiar || 'Sin registrar'"
-                  name="fechaNacimientoFamiliar{{i}}" disabled>
-              </div>
+                <div class="mb-3">
+                  <label class="form-label">Fecha de Nacimiento del Familiar</label>
+                  <input type="text" class="form-control" [value]="familiar.fecha_nacimiento_familiar || 'Sin registrar'"
+                    name="fechaNacimientoFamiliar{{i}}" disabled>
+                </div>
 
-              <div class="mb-3">
-                <label class="form-label">Edad del Familiar</label>
-                <input type="text" class="form-control" [value]="familiar.edad_familiar || 'Sin registrar'"
-                  name="edadFamiliar{{i}}" disabled>
-              </div>
+                <div class="mb-3">
+                  <label class="form-label">Edad del Familiar</label>
+                  <input type="text" class="form-control" [value]="familiar.edad_familiar || 'Sin registrar'"
+                    name="edadFamiliar{{i}}" disabled>
+                </div>
 
-              <div class="mb-3">
-                <label class="form-label">Domicilio del Familiar</label>
-                <input type="text" class="form-control" [value]="familiar.domicilio_familiar || 'Sin registrar'"
-                  name="domicilioFamiliar{{i}}" disabled>
-              </div>
+                <div class="mb-3">
+                  <label class="form-label">Domicilio del Familiar</label>
+                  <input type="text" class="form-control" [value]="familiar.domicilio_familiar || 'Sin registrar'"
+                    name="domicilioFamiliar{{i}}" disabled>
+                </div>
 
-              <div class="mb-3">
-                <label class="form-label">Escolaridad del Familiar</label>
-                <input type="text" class="form-control" [value]="familiar.escolaridad_familiar || 'Sin registrar'"
-                  name="escolaridadFamiliar{{i}}" disabled>
-              </div>
+                <div class="mb-3">
+                  <label class="form-label">Escolaridad del Familiar</label>
+                  <input type="text" class="form-control" [value]="familiar.escolaridad_familiar || 'Sin registrar'"
+                    name="escolaridadFamiliar{{i}}" disabled>
+                </div>
 
-              <div class="mb-3">
-                <label class="form-label">Puesto del Familiar</label>
-                <input type="text" class="form-control" [value]="familiar.puesto_familiar || 'Sin registrar'"
-                  name="puestoFamiliar{{i}}" disabled>
-              </div>
+                <div class="mb-3">
+                  <label class="form-label">Puesto del Familiar</label>
+                  <input type="text" class="form-control" [value]="familiar.puesto_familiar || 'Sin registrar'"
+                    name="puestoFamiliar{{i}}" disabled>
+                </div>
 
-              <div class="mb-3">
-                <label class="form-label">Ocupación del Familiar</label>
-                <input type="text" class="form-control" [value]="familiar.ocupacion_familiar || 'Sin registrar'"
-                  name="ocupacionFamiliar{{i}}" disabled>
-              </div>
+                <div class="mb-3">
+                  <label class="form-label">Ocupación del Familiar</label>
+                  <input type="text" class="form-control" [value]="familiar.ocupacion_familiar || 'Sin registrar'"
+                    name="ocupacionFamiliar{{i}}" disabled>
+                </div>
 
-              <div class="mb-3">
-                <label class="form-label">Parentesco con el Familiar</label>
-                <input type="text" class="form-control" [value]="familiar.parentesco_familiar || 'Sin registrar'"
-                  name="parentescoFamiliar{{i}}" disabled>
-              </div>
+                <div class="mb-3">
+                  <label class="form-label">Parentesco con el Familiar</label>
+                  <input type="text" class="form-control" [value]="familiar.parentesco_familiar || 'Sin registrar'"
+                    name="parentescoFamiliar{{i}}" disabled>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Teléfono del Familiar</label>
+                  <input type="text" class="form-control" [value]="familiar.telefono_familiar || 'Sin registrar'"
+                    name="telefonoFamiliar{{i}}" disabled>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Correo del Familiar</label>
+                  <input type="text" class="form-control" [value]="familiar.correo_familiar || 'Sin registrar'"
+                    name="correoFamiliar{{i}}" disabled>
+                </div>
+              </fieldset>
             </div>
           </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
           <div *ngIf="selectedCollection === 'encuesta-compromiso-empleados'" class="modal-info">
